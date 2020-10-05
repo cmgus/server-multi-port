@@ -1,7 +1,8 @@
 const app = (require('express'))()
-
-app.get('/', (req, res) => {
-    res.json({ message: 'Web Server App'})
+const fetch = require('node-fetch')
+app.get('/', async (req, res) => {
+    const body = await (await fetch(`http://localhost:${process.env.PORT || 3001}`)).json()
+    res.json({ message: body.message })
 })
 
 module.exports = app
